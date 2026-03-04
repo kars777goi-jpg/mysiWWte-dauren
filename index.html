@@ -34,8 +34,8 @@
                 Сіздерді 8 наурыз – Халықаралық әйелдер күніне арналған ерекше кешке шақырамыз! 💐
             </p>
             <p>
-                <strong>Күні:</strong> 08 наурыз 2026 жыл<br>
-                <strong>Уақыты:</strong> 18:00<br>
+                <strong>Күні:</strong> 04 наурыз 2026 жыл<br>
+                <strong>Уақыты:</strong> 14:00<br>
                 <strong>Өтетін орны:</strong> Антикафе
             </p>
             <p>
@@ -52,13 +52,15 @@
         $(document).ready(function() {
             var audio = document.getElementById('bgMusic');
 
-            // Экранды басса музыка ойнай бастайды
+            // Қолданушы экранды бір рет басса, музыка ойнай бастайды
             $(document).one('click', function() {
-                audio.play();
+                audio.play().catch(function(error) {
+                    console.log("Музыканы қосу мүмкін болмады:", error);
+                });
             });
 
-            // Конвертті басқанда да музыка қосылатынына сенімді болу үшін
-            $('.valentines-day').click(function() {
+            // Конвертті немесе хатты басқанда музыканы қайта тексеру
+            $('.valentines-day, #card').click(function() {
                 if (audio.paused) {
                     audio.play();
                 }
