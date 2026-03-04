@@ -8,9 +8,27 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>8 НАУРЫЗ!</title>
+    <style>
+        /* Музыка батырмасы үшін кішкене стиль (қосымша) */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
+    <audio id="bgMusic" loop>
+        <source src="assets/audio/music.mp3" type="audio/mpeg">
+        Браузеріңіз аудионы қолдамайды.
+    </audio>
+
     <div class="valentines-day">
         <div class="envelope"></div>
         <div class="heart"></div>
@@ -29,8 +47,8 @@
                 Сіздерді 8 наурыз – Халықаралық әйелдер күніне арналған ерекше кешке шақырамыз! 💐
             </p>
             <p>
-                Күні: 08 наурыз 2026 жыл
-                Уақыты: 18:00
+                Күні: 08 наурыз 2026 жыл<br>
+                Уақыты: 18:00<br>
                 Өтетін орны: Антикафе
             </p>
             <p>
@@ -42,6 +60,29 @@
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <script src="assets/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var audio = document.getElementById('bgMusic');
+
+            // Қолданушы экранды кез келген жерден басқанда музыка ойнайды
+            // Бұл браузерлердің шектеуін айналып өту үшін қажет
+            $(document).one('click', function() {
+                audio.play().then(() => {
+                    console.log("Музыка ойнап жатыр");
+                }).catch(error => {
+                    console.log("Автоматты ойнатуға рұқсат жоқ:", error);
+                });
+            });
+
+            // Егер конвертті басса, музыканы қосымша іске қосу
+            $('.valentines-day').click(function() {
+                if (audio.paused) {
+                    audio.play();
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
